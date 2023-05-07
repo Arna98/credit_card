@@ -54,9 +54,13 @@ class cCards extends StatelessWidget {
     // collapsed credit cards
     buildCollapsed2() {
       double size = 380;
-      return Stack( children: [
-        Image.asset("assets/images/1.png"),
-
+      return Stack(alignment: Alignment.centerLeft, children: [
+        Image.asset(width: size, height: size, "assets/images/1.png"),
+        Image.asset(
+            width: size / 1.2, height: size / 1.2, "assets/images/2.png"),
+        Image.asset(
+            width: size / 1.5, height: size / 1.5, "assets/images/3.png"),
+        Image.asset(width: size / 2, height: size / 2, "assets/images/4.png"),
       ]);
     }
     // title and subtitle
@@ -83,17 +87,17 @@ class cCards extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Image.asset(width: size, height: size, "assets/images/1.png"),
           Image.asset(width: size, height: size, "assets/images/2.png"),
-          Image.asset(width: size, height: size, "assets/images/2.png"),
-          Image.asset(width: size, height: size, "assets/images/2.png"),
-          Image.asset(width: size, height: size, "assets/images/2.png"),
+          Image.asset(width: size, height: size, "assets/images/3.png"),
+          Image.asset(width: size, height: size, "assets/images/4.png"),
         ],
       );
     }
 
     return ExpandableNotifier(
         child: Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
       child: ScrollOnExpand(
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -113,7 +117,7 @@ class cCards extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   Builder(
                     builder: (context) {
                       var controller =
@@ -123,7 +127,7 @@ class cCards extends StatelessWidget {
                           controller.expanded ? "COLLAPSE" : "EXPAND",
                           style: Theme.of(context)
                               .textTheme
-                              .button!
+                              .labelLarge!
                               .copyWith(color: Colors.deepPurple),
                         ),
                         onPressed: () {
