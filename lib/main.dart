@@ -2,10 +2,12 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Home());
+  runApp(const Home());
 }
 
 class Home extends StatelessWidget {
+  const Home({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -15,25 +17,22 @@ class Home extends StatelessWidget {
   }
 }
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({
     super.key,
   });
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(body: SingleChildScrollView(child: cCards())),
+    return const SafeArea(
+      child: Scaffold(body: SingleChildScrollView(child: CCards())),
     );
   }
 }
 
-class cCards extends StatelessWidget {
+class CCards extends StatelessWidget {
+  const CCards({super.key});
+
   @override
   Widget build(BuildContext context) {
     // title
@@ -53,16 +52,26 @@ class cCards extends StatelessWidget {
 
     // collapsed credit cards
     buildCollapsed2() {
-      double size = 380;
-      return Stack(alignment: Alignment.centerLeft, children: [
-        Image.asset(width: size, height: size, "assets/images/1.png"),
+      return Stack(alignment: Alignment.topLeft, children: [
         Image.asset(
-            width: size / 1.2, height: size / 1.2, "assets/images/2.png"),
+          "assets/images/1.png",
+          scale: 3,
+        ),
         Image.asset(
-            width: size / 1.5, height: size / 1.5, "assets/images/3.png"),
-        Image.asset(width: size / 2, height: size / 2, "assets/images/4.png"),
+          "assets/images/2.png",
+          scale: 7,
+        ),
+        Image.asset(
+          "assets/images/3.png",
+          scale: 9,
+        ),
+        Image.asset(
+          "assets/images/4.png",
+          scale: 12,
+        ),
       ]);
     }
+
     // title and subtitle
     buildExpanded1() {
       return Padding(
@@ -81,16 +90,28 @@ class cCards extends StatelessWidget {
         ),
       );
     }
+
     // expanded credit cards
     buildExpanded2() {
-      double size = 380;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(width: size, height: size, "assets/images/1.png"),
-          Image.asset(width: size, height: size, "assets/images/2.png"),
-          Image.asset(width: size, height: size, "assets/images/3.png"),
-          Image.asset(width: size, height: size, "assets/images/4.png"),
+        Image.asset(
+          "assets/images/1.png",
+          scale: 3,
+        ),
+        Image.asset(
+          "assets/images/2.png",
+          scale: 3,
+        ),
+        Image.asset(
+          "assets/images/3.png",
+          scale: 3,
+        ),
+        Image.asset(
+          "assets/images/4.png",
+          scale: 3,
+        ),
         ],
       );
     }
@@ -98,48 +119,46 @@ class cCards extends StatelessWidget {
     return ExpandableNotifier(
         child: Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
-      child: ScrollOnExpand(
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expandable(
-                collapsed: buildCollapsed1(),
-                expanded: buildExpanded1(),
-              ),
-              Expandable(
-                collapsed: buildCollapsed2(),
-                expanded: buildExpanded2(),
-              ),
-              const Divider(
-                height: 1,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Builder(
-                    builder: (context) {
-                      var controller =
-                          ExpandableController.of(context, required: true)!;
-                      return TextButton(
-                        child: Text(
-                          controller.expanded ? "COLLAPSE" : "EXPAND",
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .copyWith(color: Colors.deepPurple),
-                        ),
-                        onPressed: () {
-                          controller.toggle();
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expandable(
+              collapsed: buildCollapsed1(),
+              expanded: buildExpanded1(),
+            ),
+            Expandable(
+              collapsed: buildCollapsed2(),
+              expanded: buildExpanded2(),
+            ),
+            const Divider(
+              height: 1,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Builder(
+                  builder: (context) {
+                    var controller =
+                        ExpandableController.of(context, required: true)!;
+                    return TextButton(
+                      child: Text(
+                        controller.expanded ? "COLLAPSE" : "EXPAND",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(color: Colors.deepPurple),
+                      ),
+                      onPressed: () {
+                        controller.toggle();
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     ));
