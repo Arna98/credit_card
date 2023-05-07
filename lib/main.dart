@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(body: cCards()),
+      child: Scaffold(body: SingleChildScrollView(child: cCards())),
     );
   }
 }
@@ -54,66 +54,40 @@ class cCards extends StatelessWidget {
     // collapsed credit cards
     buildCollapsed2() {
       double size = 380;
-      return Stack(alignment: Alignment.centerLeft, children: [
-        Image.asset(width: size, height: size, "assets/images/1.png"),
-        Image.asset(
-            width: size / 1.2, height: size / 1.2, "assets/images/2.png"),
-        Image.asset(
-            width: size / 1.5, height: size / 1.5, "assets/images/3.png"),
-        Image.asset(width: size / 2, height: size / 2, "assets/images/4.png"),
+      return Stack( children: [
+        Image.asset("assets/images/1.png"),
+
       ]);
     }
-
+    // title and subtitle
     buildExpanded1() {
       return Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "Expandable",
+          children: [
+            const Text(
+              "Credit Cards",
             ),
             Text(
-              "3 Expandable widgets",
-              style: Theme.of(context).textTheme.caption,
+              "You have 4 credit cards",
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ],
         ),
       );
     }
-
+    // expanded credit cards
     buildExpanded2() {
+      double size = 380;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              //Expanded(child: buildImg(Colors.lightGreenAccent, 100)),
-              //Expanded(child: buildImg(Colors.orange, 100)),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              // Expanded(child: buildImg(Colors.lightBlue, 100)),
-              //Expanded(child: buildImg(Colors.cyan, 100)),
-            ],
-          ),
+        children: [
+          Image.asset(width: size, height: size, "assets/images/2.png"),
+          Image.asset(width: size, height: size, "assets/images/2.png"),
+          Image.asset(width: size, height: size, "assets/images/2.png"),
+          Image.asset(width: size, height: size, "assets/images/2.png"),
         ],
-      );
-    }
-
-    buildExpanded3() {
-      return Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "loremIpsum",
-              softWrap: true,
-            ),
-          ],
-        ),
       );
     }
 
@@ -125,7 +99,7 @@ class cCards extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               Expandable(
                 collapsed: buildCollapsed1(),
                 expanded: buildExpanded1(),
@@ -134,11 +108,7 @@ class cCards extends StatelessWidget {
                 collapsed: buildCollapsed2(),
                 expanded: buildExpanded2(),
               ),
-              Expandable(
-                collapsed: buildCollapsed3(),
-                expanded: buildExpanded3(),
-              ),
-              Divider(
+              const Divider(
                 height: 1,
               ),
               Row(
