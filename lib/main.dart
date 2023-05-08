@@ -1,3 +1,4 @@
+import 'package:ccard/credit_card.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
@@ -24,8 +25,26 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(body: SingleChildScrollView(child: CCards())),
+    return SafeArea(
+      child: Scaffold(
+          body: SingleChildScrollView(
+              child: Column(
+        children: [
+          const CCards(),
+          const SizedBox(height: 10,),
+          ElevatedButton(
+            onPressed: (){
+              // navigate to credit card scrren
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => FlippableCard())));
+            },
+            style: TextButton.styleFrom(
+            elevation: 0,
+            backgroundColor: Colors.deepPurpleAccent,
+            fixedSize: const Size(200, 30),
+          ),
+          child: const Text("Credite Crads Version 2.0", style: TextStyle(color: Colors.white),))
+        ],
+      ))),
     );
   }
 }
@@ -51,7 +70,7 @@ class CCards extends StatelessWidget {
     }
 
     // collapsed credit cards
-    buildCollapsed2() {
+    Widget buildCollapsed2() {
       return Stack(alignment: Alignment.topLeft, children: [
         Image.asset(
           "assets/images/1.png",
@@ -73,7 +92,7 @@ class CCards extends StatelessWidget {
     }
 
     // title and subtitle
-    buildExpanded1() {
+    Widget buildExpanded1() {
       return Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -92,26 +111,26 @@ class CCards extends StatelessWidget {
     }
 
     // expanded credit cards
-    buildExpanded2() {
+    Widget buildExpanded2() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        Image.asset(
-          "assets/images/1.png",
-          scale: 3,
-        ),
-        Image.asset(
-          "assets/images/2.png",
-          scale: 3,
-        ),
-        Image.asset(
-          "assets/images/3.png",
-          scale: 3,
-        ),
-        Image.asset(
-          "assets/images/4.png",
-          scale: 3,
-        ),
+          Image.asset(
+            "assets/images/1.png",
+            scale: 3,
+          ),
+          Image.asset(
+            "assets/images/2.png",
+            scale: 3,
+          ),
+          Image.asset(
+            "assets/images/3.png",
+            scale: 3,
+          ),
+          Image.asset(
+            "assets/images/4.png",
+            scale: 3,
+          ),
         ],
       );
     }
